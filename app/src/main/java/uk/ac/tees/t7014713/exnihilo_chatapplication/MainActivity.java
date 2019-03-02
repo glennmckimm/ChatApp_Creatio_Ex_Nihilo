@@ -1,9 +1,15 @@
 package uk.ac.tees.t7014713.exnihilo_chatapplication;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
+
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,5 +34,17 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,"Press again to exit", Toast.LENGTH_SHORT).show();
         }
         backPressed = System.currentTimeMillis();
+    }
+
+    public void logout(View view) {
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
     }
 }
