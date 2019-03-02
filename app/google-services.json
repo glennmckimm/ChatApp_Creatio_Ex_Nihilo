@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "840104606680",
+    "firebase_url": "https://chatapp-ex-nihilo-7c4b0.firebaseio.com",
+    "project_id": "chatapp-ex-nihilo-7c4b0",
+    "storage_bucket": "chatapp-ex-nihilo-7c4b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840104606680:android:a904a4bcd9049307",
+        "android_client_info": {
+          "package_name": "uk.ac.tees.t7014713.exnihilo_chatapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840104606680-rrp0uo63a0bqv87s0ianm8tadit7bsbi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uk.ac.tees.t7014713.exnihilo_chatapplication",
+            "certificate_hash": "07ba1326c9ce5ed026d97eb3122707d09399aa7c"
+          }
+        },
+        {
+          "client_id": "840104606680-f54nrtv46fecdn2gg8rjgulu60an1jdq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8wwOF77TAwWC8ze51L-Qj704TFdgGW-s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "840104606680-f54nrtv46fecdn2gg8rjgulu60an1jdq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
