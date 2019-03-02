@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">ex nihilo</string>
+    <string name="app_name">creatio ex nihilo</string>
+    <string name="login_with_google">Log in with Google</string>
 </resources>
