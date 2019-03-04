@@ -41,20 +41,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
-            Toast.makeText(this,"Press again to exit", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Press BACK again to exit", Toast.LENGTH_SHORT).show();
         }
         backPressed = System.currentTimeMillis();
-    }
-
-    public void logout(View view) {
-        AuthUI.getInstance()
-                .signOut(this)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
     }
 }

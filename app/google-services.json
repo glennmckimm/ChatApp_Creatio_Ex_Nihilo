@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "840104606680-314oeh1pmicf9ki3cdjerjlncd4eav73.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uk.ac.tees.t7014713.exnihilo_chatapplication",
+            "certificate_hash": "018cbdb8946609997087824051c315bc4448d25c"
+          }
+        },
+        {
           "client_id": "840104606680-f54nrtv46fecdn2gg8rjgulu60an1jdq.apps.googleusercontent.com",
           "client_type": 3
         }
