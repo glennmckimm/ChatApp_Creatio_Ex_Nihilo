@@ -5,4 +5,5 @@
     <color name="colorAccent">#D0D8D8</color>
     <color name="darkishPurple">#302B63</color>
     <color name="white">#FFFFFF</color>
+    <color name="background">#FF0000</color>
 </resources>
