@@ -16,7 +16,7 @@
         android:textSize="30sp"
         android:layout_marginTop="30dp"
         android:id="@+id/textView"
-        android:textColor="@color/white" />
+        android:textColor="@color/colorWhite" />
 
     <Button
         android:layout_width="wrap_content"
@@ -36,9 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/uploadImage"
         android:hint="@string/edit_text_username_hint"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:backgroundTint="@color/white"/>
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        android:backgroundTint="@color/colorWhite"/>
 
     <Button
         android:layout_width="wrap_content"
