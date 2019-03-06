@@ -1,6 +1,5 @@
 package uk.ac.tees.t7014713.exnihilo_chatapplication;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +12,8 @@ import android.view.View;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import uk.ac.tees.t7014713.exnihilo_chatapplication.Adapter.SectionsPagerAdapter;
 
 /**
  * Created by Glenn on 03/03/2019.

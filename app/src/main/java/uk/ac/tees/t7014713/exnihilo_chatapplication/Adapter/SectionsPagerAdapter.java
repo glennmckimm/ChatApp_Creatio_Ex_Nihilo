@@ -1,4 +1,4 @@
-package uk.ac.tees.t7014713.exnihilo_chatapplication;
+package uk.ac.tees.t7014713.exnihilo_chatapplication.Adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

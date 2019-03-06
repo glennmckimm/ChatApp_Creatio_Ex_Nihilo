@@ -18,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.UUID;
 
+import uk.ac.tees.t7014713.exnihilo_chatapplication.Model.User;
+
 /**
  * Created by Glenn on 03/03/2019.
  */
@@ -36,6 +38,12 @@ public class RegisterUserActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         username = findViewById(R.id.username);
         btnRegister = findViewById(R.id.btnRegister);
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setupUser(view);
+            }
+        });
     }
 
     public void setupUser(View view) {
@@ -51,13 +59,13 @@ public class RegisterUserActivity extends AppCompatActivity {
             databaseReference.child("user").child(fa.getUid()).setValue(user, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                if (databaseError != null) {
-                    Toast.makeText(RegisterUserActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(RegisterUserActivity.this, "Profile created", Toast.LENGTH_SHORT).show();
-                }
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
+                    if (databaseError != null) {
+                        Toast.makeText(RegisterUserActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(RegisterUserActivity.this, "Profile created", Toast.LENGTH_SHORT).show();
+                    }
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
                 }
             });
         }

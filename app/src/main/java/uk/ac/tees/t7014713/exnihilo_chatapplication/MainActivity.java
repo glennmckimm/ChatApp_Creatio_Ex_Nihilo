@@ -2,15 +2,14 @@ package uk.ac.tees.t7014713.exnihilo_chatapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import uk.ac.tees.t7014713.exnihilo_chatapplication.Adapter.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,10 +17,21 @@ public class MainActivity extends AppCompatActivity {
     private static long backPressed;
     private Button btnUser;
 
+    SectionsPagerAdapter mSectionsPagerAdapter;
+    ViewPager mViewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        mViewPager = (ViewPager) findViewById(R.id.viewPagerId);
+        setupViewPager(mViewPager);
+
+        TabLayout tabs = (TabLayout) findViewById(R.id.tabsId);
+        tabs.setupWithViewPager(mViewPager);
 
         btnUser = (Button) findViewById(R.id.btnUser);
         btnUser.setOnClickListener(new View.OnClickListener() {
@@ -30,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, UserActivity.class));
             }
         });
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new ConversationsFragment(), "Conversations");
+        adapter.addFragment(new ChatUsersFragment(), "Users");
+        viewPager.setAdapter(adapter);
     }
 
     @Override
