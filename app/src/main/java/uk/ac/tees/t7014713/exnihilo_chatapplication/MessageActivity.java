@@ -30,7 +30,6 @@ import uk.ac.tees.t7014713.exnihilo_chatapplication.Model.User;
 
 public class MessageActivity extends AppCompatActivity {
 
-    ImageView profile_image; //Will eventually attempt to implement profile images
     TextView username;
 
     FirebaseUser fuser;
@@ -82,7 +81,7 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String msg = txtSend.getText().toString();
-                if (msg != null) {
+                if (!msg.equals("")) {
                     sendMessage(fuser.getUid(), userID, msg);
                 } else {
                     Toast.makeText(MessageActivity.this, "You can't send empty messages", Toast.LENGTH_SHORT).show();
