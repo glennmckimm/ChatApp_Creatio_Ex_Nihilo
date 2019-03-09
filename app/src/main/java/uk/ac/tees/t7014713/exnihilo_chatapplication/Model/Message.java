@@ -16,7 +16,7 @@ public class Message {
         this.message = message;
     }
 
-    public Message() {}
+    public Message() { }
 
     public String getSender() {
         return sender;
