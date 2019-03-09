@@ -27,50 +27,73 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
+            authentication();
         }
     }
 
+    /**
+     * Chooses an authentication provider then creates and launches the sign-in intent
+     * @param view
+     */
     public void login(View view) {
-        //Choose authentication provider
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.GoogleBuilder().build());
-        //Create and launch sign-in intent
+
         startActivityForResult(
                 AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(providers)
-                        .build(),
-                RC_SIGN_IN);
+                      .createSignInIntentBuilder()
+                      .setAvailableProviders(providers)
+                      .build(),
+                       RC_SIGN_IN);
     }
 
+    /**
+     * Either sends the user to the next activity, or shows an error message
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == RC_SIGN_IN) {
             IdpResponse response = IdpResponse.fromResultIntent(data);
 
             if (resultCode == RESULT_OK) {
-                // Successfully signed in
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                startActivity(new Intent(getApplicationContext(), RegisterUserActivity.class));
-                finish();
+                authentication();
             } else {
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
-                // ...
                 Toast.makeText(LoginActivity.this, "Sign in failed", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    /**
+     * Checks to see whether the user has a username or not
+     */
+    private void authentication() {
+        final FirebaseUser fa = FirebaseAuth.getInstance().getCurrentUser();
+
+        databaseReference.child("user").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                DataSnapshot ds = dataSnapshot.child(fa.getUid()).child("username");
+                if (ds.exists() && ds.getValue(String.class) != null) {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), RegisterUserActivity.class));
+                }
+                finish();
+            }
+            @Override public void onCancelled(DatabaseError databaseError) { }
+        });
     }
 }
