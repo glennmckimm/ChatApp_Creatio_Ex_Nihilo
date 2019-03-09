@@ -13,8 +13,16 @@ import android.widget.TextView;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import uk.ac.tees.t7014713.exnihilo_chatapplication.Adapter.SectionsPagerAdapter;
+import uk.ac.tees.t7014713.exnihilo_chatapplication.Model.User;
 
 /**
  * Created by Glenn on 03/03/2019.
@@ -28,6 +36,9 @@ public class UserActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
     private TextView profileUsername;
+
+    FirebaseUser fuser;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +59,6 @@ public class UserActivity extends AppCompatActivity {
          * Get username to show in profileUsername
          * Look up the fa.getUId and then set it
          */
-        profileUsername = findViewById(R.id.profileUsername);
     }
 
     private void setupViewPager(ViewPager viewPager) {

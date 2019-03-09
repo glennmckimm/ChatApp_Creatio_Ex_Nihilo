@@ -10,7 +10,7 @@
         android:layout_height="40dp"
         android:id="@+id/profileImage"
         android:background="@drawable/circular_image_background"
-        android:foreground="@color/colorPrimaryDark" />
+        android:foreground="@color/colorPrimary" />
 
     <TextView
         android:layout_width="wrap_content"
