@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +27,8 @@ public class UserActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
 
+    private TextView profileUsername;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: UserActivityStarted");
@@ -40,6 +43,12 @@ public class UserActivity extends AppCompatActivity {
 
         TabLayout tabs = (TabLayout) findViewById(R.id.tabsId);
         tabs.setupWithViewPager(mViewPager);
+
+        /**
+         * Get username to show in profileUsername
+         * Look up the fa.getUId and then set it
+         */
+        profileUsername = findViewById(R.id.profileUsername);
     }
 
     private void setupViewPager(ViewPager viewPager) {
