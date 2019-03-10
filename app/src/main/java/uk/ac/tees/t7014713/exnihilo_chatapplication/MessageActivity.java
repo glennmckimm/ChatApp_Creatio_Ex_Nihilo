@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -36,17 +37,18 @@ import uk.ac.tees.t7014713.exnihilo_chatapplication.Model.User;
 
 public class MessageActivity extends AppCompatActivity {
 
-    TextView username;
+    private TextView username;
+    private ImageButton btnSend;
+    private EditText txtSend;
+    private Button btnOpenGallery;
+    private static final int GALLERY_INTENT = 2;
 
-    FirebaseUser fuser;
-    DatabaseReference databaseReference;
+    private FirebaseUser fUser;
+    private DatabaseReference databaseReference;
 
-    ImageButton btnSend;
-    EditText txtSend;
-
-    MessageAdapter messageAdapter;
-    List<Message> mMessage;
-    RecyclerView recyclerView;
+    private MessageAdapter messageAdapter;
+    private List<Message> mMessage;
+    private RecyclerView recyclerView;
 
     /**
      * When a user is clicked on, this activity is called and displays the sent messages on screen
@@ -77,12 +79,11 @@ public class MessageActivity extends AppCompatActivity {
 
         username = findViewById(R.id.username);
         txtSend = findViewById(R.id.txtSend);
-        btnSend = findViewById(R.id.btnSend);
 
         Intent intent = getIntent();
         final String userID = intent.getStringExtra("username");
 
-        fuser = FirebaseAuth.getInstance().getCurrentUser();
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("user").child(userID);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -91,7 +92,7 @@ public class MessageActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
 
-                readMessage(fuser.getUid(), userID);
+                readMessage(fUser.getUid(), userID);
             }
 
             @Override
@@ -100,16 +101,27 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
+        btnSend = findViewById(R.id.btnSend);
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String msg = txtSend.getText().toString();
                 if (!msg.equals("")) {
-                    sendMessage(fuser.getUid(), userID, msg);
+                    sendMessage(fUser.getUid(), userID, msg);
                 } else {
                     Toast.makeText(MessageActivity.this, "You can't send empty messages", Toast.LENGTH_SHORT).show();
                 }
                 txtSend.setText("");
+            }
+        });
+
+        btnOpenGallery = findViewById(R.id.openGallery);
+        btnOpenGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, GALLERY_INTENT);
             }
         });
     }
@@ -136,7 +148,7 @@ public class MessageActivity extends AppCompatActivity {
         databaseReference.child("chats").push().setValue(hashMap);
         final DatabaseReference msgReference = FirebaseDatabase.getInstance()
                                                                .getReference("ConversationList")
-                                                               .child(fuser.getUid())
+                                                               .child(fUser.getUid())
                                                                .child(receiver);
         msgReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -155,8 +167,8 @@ public class MessageActivity extends AppCompatActivity {
         final DatabaseReference msgReferenceReceiver = FirebaseDatabase.getInstance()
                                                                   .getReference("ConversationList")
                                                                   .child(receiver)
-                                                                  .child(fuser.getUid());
-        msgReferenceReceiver.child("id").setValue(fuser.getUid());
+                                                                  .child(fUser.getUid());
+        msgReferenceReceiver.child("id").setValue(fUser.getUid());
     }
 
     /**

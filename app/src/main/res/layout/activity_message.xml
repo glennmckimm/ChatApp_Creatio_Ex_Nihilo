@@ -37,6 +37,14 @@
         android:layout_below="@+id/app_bar_layout"
         android:layout_above="@+id/bottom" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/openGallery"
+        android:layout_below="@+id/recycler_view"
+        android:layout_marginStart="200dp"
+        android:text="Upload Image"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
