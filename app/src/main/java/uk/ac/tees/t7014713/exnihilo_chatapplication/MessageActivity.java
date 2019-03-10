@@ -138,7 +138,11 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-
+        final DatabaseReference msgReferenceReceiver = FirebaseDatabase.getInstance()
+                                                                  .getReference("ConversationList")
+                                                                  .child(receiver)
+                                                                  .child(fuser.getUid());
+        msgReferenceReceiver.child("id").setValue(fuser.getUid());
     }
 
     private void readMessage(final String senderID, final String receiverID) {
