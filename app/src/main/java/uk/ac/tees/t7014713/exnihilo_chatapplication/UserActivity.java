@@ -37,6 +37,9 @@ public class UserActivity extends AppCompatActivity {
 
     private TextView profileUsername;
 
+    FirebaseUser fuser;
+    DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: UserActivityStarted");
@@ -53,6 +56,21 @@ public class UserActivity extends AppCompatActivity {
         tabs.setupWithViewPager(mViewPager);
 
         profileUsername = findViewById(R.id.profileUsername);
+
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("user").child(fuser.getUid());
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                profileUsername.setText(user.getUsername());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void setupViewPager(ViewPager viewPager) {
