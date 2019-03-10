@@ -42,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * SectionPagerAdapter so that the Conversations and Users tabs are displayed on the main screen
+     * @param viewPager
+     */
     private void setupViewPager(ViewPager viewPager) {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ConversationsFragment(), "Conversations");
@@ -49,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
+    /**
+     * Asks the user to press the back button twice before closing the application
+     */
     @Override
     public void onBackPressed() {
         if (backPressed + TIME_DELAY > System.currentTimeMillis()) {

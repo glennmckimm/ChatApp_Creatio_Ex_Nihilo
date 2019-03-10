@@ -28,6 +28,9 @@ public class RegisterUserActivity extends AppCompatActivity {
     private EditText username;
     private Button btnRegister;
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,12 @@ public class RegisterUserActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * If the user is not registered with a username, the user will require one. And there is also
+     * the option to set the profile image too
+     *
+     * @param view
+     */
     public void setupUser(View view) {
         if (username.getText().toString().isEmpty()) {
             Toast.makeText(RegisterUserActivity.this, "You can't leave the username field empty", Toast.LENGTH_SHORT).show();

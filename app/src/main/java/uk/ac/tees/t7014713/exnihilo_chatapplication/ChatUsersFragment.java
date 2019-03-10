@@ -41,6 +41,14 @@ public class ChatUsersFragment extends Fragment {
         // empty public constructor
     }
 
+    /**
+     * Displays all users names and profile images in the tab
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: ChatUsersFragment started");
@@ -57,9 +65,11 @@ public class ChatUsersFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Reads all users from the FirebaseDatabase and display them in the Users tab
+     */
     private void readUsers() {
-
-        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -69,7 +79,8 @@ public class ChatUsersFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     User user = snapshot.getValue(User.class);
 
-                    if (!user.getUsername().equals(firebaseUser.getUid())) {
+                    // Displays every user apart from themselves to themselves
+                    if (!user.getUserUID().equals(fUser.getUid())) {
                         mUsers.add(user);
                     }
 

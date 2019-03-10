@@ -48,6 +48,11 @@ public class MessageActivity extends AppCompatActivity {
     List<Message> mMessage;
     RecyclerView recyclerView;
 
+    /**
+     * When a user is clicked on, this activity is called and displays the sent messages on screen
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +114,16 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Hashmap for messages, sending the data to FirebaseDatabase then later being read
+     *
+     * There are databaseReferences so that the users conversations are added into the arraylist
+     * and displayed in the ConversationsFragment - unless they're already there then it does nothing
+     *
+     * @param sender
+     * @param receiver
+     * @param message
+     */
     private void sendMessage(String sender, final String receiver, String message) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -117,13 +132,12 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
 
+        //ConversationList - the current user is placed in the receiver's conversation tab and vice versa
         databaseReference.child("chats").push().setValue(hashMap);
-
         final DatabaseReference msgReference = FirebaseDatabase.getInstance()
                                                                .getReference("ConversationList")
                                                                .child(fuser.getUid())
                                                                .child(receiver);
-
         msgReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -145,6 +159,15 @@ public class MessageActivity extends AppCompatActivity {
         msgReferenceReceiver.child("id").setValue(fuser.getUid());
     }
 
+    /**
+     * As the method name says - ReadMessages -
+     * allows the users to be able to see the message sent and received
+     *
+     * Will also have profileImage added to it later
+     *
+     * @param senderID
+     * @param receiverID
+     */
     private void readMessage(final String senderID, final String receiverID) {
         mMessage = new ArrayList<>();
 

@@ -40,6 +40,11 @@ public class UserActivity extends AppCompatActivity {
     FirebaseUser fuser;
     DatabaseReference databaseReference;
 
+    /**
+     * Displays the necessary information in the UserActivity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: UserActivityStarted");
@@ -59,6 +64,10 @@ public class UserActivity extends AppCompatActivity {
         setProfileUsername();
     }
 
+    /**
+     * Reads the FirebaseDatabase checking the current users Id
+     * then looks for the username is sets it accordingly
+     */
     private void setProfileUsername() {
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("user").child(fuser.getUid());
@@ -76,6 +85,11 @@ public class UserActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Uses SectionPagerAdapter and adds the fragments to the page
+     *
+     * @param viewPager
+     */
     private void setupViewPager(ViewPager viewPager) {
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new UserProfileFragment(), "Profile");
@@ -83,15 +97,17 @@ public class UserActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
+    /**
+     * @param view
+     */
     public void logout(View view) {
         AuthUI.getInstance()
-                .signOut(this)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
+              .signOut(this)
+              .addOnCompleteListener(new OnCompleteListener<Void>() {
+                  public void onComplete(@NonNull Task<Void> task) {
+                      startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                      finish();
+                  }
+              });
     }
 }

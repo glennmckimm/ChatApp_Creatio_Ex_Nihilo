@@ -44,6 +44,12 @@ public class ConversationsFragment extends Fragment {
         // empty public constructor
     }
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: ConversationsFragment started");
@@ -77,6 +83,9 @@ public class ConversationsFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Displays the users that they have either sent messages to or received messages from
+     */
     private void conversationList() {
         mUser = new ArrayList<>();
         databaseReference = FirebaseDatabase.getInstance().getReference("user");
