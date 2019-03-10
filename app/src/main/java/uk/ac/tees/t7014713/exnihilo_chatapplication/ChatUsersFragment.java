@@ -30,7 +30,7 @@ import uk.ac.tees.t7014713.exnihilo_chatapplication.Model.User;
 
 public class ChatUsersFragment extends Fragment {
 
-    private static final String TAG = "UserProfileFragment";
+    private static final String TAG = "ChatUsersFragment";
 
     private RecyclerView recyclerView;
 
@@ -43,7 +43,7 @@ public class ChatUsersFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView: UserProfileFragment started");
+        Log.d(TAG, "onCreateView: ChatUsersFragment started");
         View view = inflater.inflate(R.layout.fragment_chat_users, container, false);
 
         recyclerView = view.findViewById(R.id.recycler_view);
@@ -68,9 +68,6 @@ public class ChatUsersFragment extends Fragment {
                 mUsers.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     User user = snapshot.getValue(User.class);
-
-                    assert user != null;
-                    assert firebaseUser != null;
 
                     if (!user.getUsername().equals(firebaseUser.getUid())) {
                         mUsers.add(user);

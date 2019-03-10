@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 public class UserSettingsFragment extends Fragment {
 
-    private static final String TAG = "UserProfileFragment";
+    private static final String TAG = "UserSettingsFragment";
 
     public UserSettingsFragment() {
         // empty public constructor
@@ -21,7 +21,7 @@ public class UserSettingsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView: UserProfileFragment started");
+        Log.d(TAG, "onCreateView: UserSettingsFragment started");
         View view = inflater.inflate(R.layout.fragment_user_settings, container, false);
 
         return view;

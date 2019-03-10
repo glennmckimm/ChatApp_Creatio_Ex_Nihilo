@@ -37,9 +37,6 @@ public class UserActivity extends AppCompatActivity {
 
     private TextView profileUsername;
 
-    FirebaseUser fuser;
-    DatabaseReference databaseReference;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: UserActivityStarted");
@@ -55,10 +52,7 @@ public class UserActivity extends AppCompatActivity {
         TabLayout tabs = (TabLayout) findViewById(R.id.tabsId);
         tabs.setupWithViewPager(mViewPager);
 
-        /**
-         * Get username to show in profileUsername
-         * Look up the fa.getUId and then set it
-         */
+        profileUsername = findViewById(R.id.profileUsername);
     }
 
     private void setupViewPager(ViewPager viewPager) {

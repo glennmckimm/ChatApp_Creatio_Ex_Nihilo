@@ -16,8 +16,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.UUID;
-
 import uk.ac.tees.t7014713.exnihilo_chatapplication.Model.User;
 
 /**
