@@ -8,9 +8,7 @@ public class User {
 
     private String userUID, username;
 
-    public User() {
-
-    }
+    public User() { }
 
     public User(String userUID, String username) {
         this.userUID = userUID;

@@ -109,7 +109,7 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
-    private void sendMessage(String sender, String receiver, String message) {
+    private void sendMessage(String sender, final String receiver, String message) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -118,6 +118,27 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("message", message);
 
         databaseReference.child("chats").push().setValue(hashMap);
+
+        final DatabaseReference msgReference = FirebaseDatabase.getInstance()
+                                                               .getReference("ConversationList")
+                                                               .child(fuser.getUid())
+                                                               .child(receiver);
+
+        msgReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    msgReference.child("id").setValue(receiver);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
     private void readMessage(final String senderID, final String receiverID) {

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.tees.t7014713.exnihilo_chatapplication.Adapter.UserAdapter;
+import uk.ac.tees.t7014713.exnihilo_chatapplication.Model.ConversationList;
 import uk.ac.tees.t7014713.exnihilo_chatapplication.Model.Message;
 import uk.ac.tees.t7014713.exnihilo_chatapplication.Model.User;
 
@@ -35,7 +36,7 @@ public class ConversationsFragment extends Fragment {
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
     private List<User> mUser;
-    private List<String> userList;
+    private List<ConversationList> userList;
     FirebaseUser fuser;
     DatabaseReference databaseReference;
 
@@ -54,25 +55,17 @@ public class ConversationsFragment extends Fragment {
 
         userList = new ArrayList<>();
         fuser = FirebaseAuth.getInstance().getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference("chats");
 
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("ConversationList").child(fuser.getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userList.clear();
-
-                for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Message msg = ds.getValue(Message.class);
-
-                    if(msg.getSender().equals(fuser.getUid())) {
-                        userList.add(msg.getReceiver());
-                    }
-                    if(msg.getReceiver().equals(fuser.getUid())) {
-                        userList.add(msg.getSender());
-                    }
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    ConversationList cl = ds.getValue(ConversationList.class);
+                    userList.add(cl);
                 }
-
-                openConversation();
+                conversationList();
             }
 
             @Override
@@ -84,29 +77,18 @@ public class ConversationsFragment extends Fragment {
         return view;
     }
 
-    private void openConversation() {
+    private void conversationList() {
         mUser = new ArrayList<>();
-
         databaseReference = FirebaseDatabase.getInstance().getReference("user");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mUser.clear();
-
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     User user = ds.getValue(User.class);
-
-                    for (String id : userList) {
-                        if (user.getUserUID().equals(id)) {
-                            if (mUser.size() != 0) {
-                                for (User user1 : mUser) {
-                                    if (!user.getUserUID().equals(user1.getUserUID())) {
-                                        mUser.add(user);
-                                    }
-                                }
-                            } else {
-                                mUser.add(user);
-                            }
+                    for (ConversationList cl : userList) {
+                        if (user.getUserUID().equals(cl.getId())) {
+                            mUser.add(user);
                         }
                     }
                 }

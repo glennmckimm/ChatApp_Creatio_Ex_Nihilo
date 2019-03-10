@@ -56,7 +56,10 @@ public class UserActivity extends AppCompatActivity {
         tabs.setupWithViewPager(mViewPager);
 
         profileUsername = findViewById(R.id.profileUsername);
+        setProfileUsername();
+    }
 
+    private void setProfileUsername() {
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("user").child(fuser.getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
