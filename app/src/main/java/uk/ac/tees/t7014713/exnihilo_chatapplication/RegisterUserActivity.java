@@ -102,8 +102,6 @@ public class RegisterUserActivity extends AppCompatActivity {
      * @param view
      */
     public void setupUser(View view) {
-        progressDialog.setMessage("Creating user profile...");
-        progressDialog.show();
 
         if (username.getText().toString().isEmpty()) {
             Toast.makeText(RegisterUserActivity.this, "You can't leave the username field empty", Toast.LENGTH_SHORT).show();
@@ -114,6 +112,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         } else {
             progressDialog.setMessage("Creating user profile...");
             progressDialog.show();
+
             final FirebaseUser fa = FirebaseAuth.getInstance().getCurrentUser();
 
             User user = new User(fa.getUid(), username.getText().toString());

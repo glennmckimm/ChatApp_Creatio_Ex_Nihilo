@@ -4,9 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/search_hint"
+        android:textSize="18sp"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        android:id="@+id/searchForUser"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/searchForUser" />
 
 </RelativeLayout>

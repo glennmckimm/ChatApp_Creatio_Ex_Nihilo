@@ -5,4 +5,5 @@
     <string name="edit_text_username_hint">Username</string>
     <string name="finished_registering">Continue</string>
     <string name="upload_image">Upload Image</string>
+    <string name="search_hint">Search...</string>
 </resources>

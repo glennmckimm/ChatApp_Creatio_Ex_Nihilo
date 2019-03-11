@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import uk.ac.tees.t7014713.exnihilo_chatapplication.Adapter.SectionsPagerAdapter;
@@ -15,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int TIME_DELAY = 2000;
     private static long backPressed;
-    private Button btnUser;
+    private ImageButton btnUser;
 
     SectionsPagerAdapter mSectionsPagerAdapter;
     ViewPager mViewPager;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabs = (TabLayout) findViewById(R.id.tabsId);
         tabs.setupWithViewPager(mViewPager);
 
-        btnUser = (Button) findViewById(R.id.btnUser);
+        btnUser = (ImageButton) findViewById(R.id.btnUser);
         btnUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
