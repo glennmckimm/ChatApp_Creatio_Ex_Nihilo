@@ -1,5 +1,6 @@
 package uk.ac.tees.t7014713.exnihilo_chatapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,13 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +29,7 @@ import java.util.List;
 import uk.ac.tees.t7014713.exnihilo_chatapplication.Adapter.MessageAdapter;
 import uk.ac.tees.t7014713.exnihilo_chatapplication.Model.Message;
 import uk.ac.tees.t7014713.exnihilo_chatapplication.Model.User;
+import uk.ac.tees.t7014713.exnihilo_chatapplication.Pop_up.PopupOptionsActivity;
 
 /**
  * Created by Glenn on 04/03/2019.
@@ -44,9 +41,6 @@ public class MessageActivity extends AppCompatActivity {
     private ImageButton btnSend;
     private EditText txtSend;
     private ImageButton btnChoice;
-    private Button btnGifs;
-    private Button btnCamera;
-    private Button btnGallery;
     private static final int GALLERY_INTENT = 2;
 
     private FirebaseUser fUser;
@@ -121,58 +115,11 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-        btnGifs = findViewById(R.id.btnGifs);
-
-        btnCamera = findViewById(R.id.btnCamera);
-        btnCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), CameraActivity.class));
-            }
-        });
-
-        btnGallery = findViewById(R.id.btnGallery);
-        btnGallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, GALLERY_INTENT);
-            }
-        });
-
-        final Animation slide_left_in = AnimationUtils.loadAnimation(
-                getApplicationContext(), R.anim.slide_left_in);
-        final Animation slide_right_out = AnimationUtils.loadAnimation(
-                getApplicationContext(), R.anim.slide_right_out);
-
         btnChoice = findViewById(R.id.choice);
         btnChoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (txtSend.getVisibility() == View.VISIBLE) {
-                    txtSend.startAnimation(slide_right_out);
-                    txtSend.setVisibility(View.GONE);
-                    btnSend.startAnimation(slide_right_out);
-                    btnSend.setVisibility(View.GONE);
-                    btnGifs.startAnimation(slide_left_in);
-                    btnGifs.setVisibility(View.VISIBLE);
-                    btnCamera.startAnimation(slide_left_in);
-                    btnCamera.setVisibility(View.VISIBLE);
-                    btnGallery.startAnimation(slide_left_in);
-                    btnGallery.setVisibility(View.VISIBLE);
-                } else {
-                    txtSend.startAnimation(slide_left_in);
-                    txtSend.setVisibility(View.VISIBLE);
-                    btnSend.startAnimation(slide_left_in);
-                    btnSend.setVisibility(View.VISIBLE);
-                    btnGifs.startAnimation(slide_right_out);
-                    btnGifs.setVisibility(View.GONE);
-                    btnCamera.startAnimation(slide_right_out);
-                    btnCamera.setVisibility(View.GONE);
-                    btnGallery.startAnimation(slide_right_out);
-                    btnGallery.setVisibility(View.GONE);
-                }
+                startActivity(new Intent(getApplicationContext(), PopupOptionsActivity.class));
             }
         });
     }

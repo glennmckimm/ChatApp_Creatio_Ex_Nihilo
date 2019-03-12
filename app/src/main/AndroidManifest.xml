@@ -43,7 +43,10 @@
         <activity
             android:name=".MessageActivity" />
         <activity
-            android:name=".PopupActivity"
+            android:name=".Pop_up.PopupActivity"
+            android:theme="@style/AppTheme.PopupTheme" />
+        <activity
+            android:name=".Pop_up.PopupOptionsActivity"
             android:theme="@style/AppTheme.PopupTheme" />
         <activity
             android:name=".CameraActivity" />

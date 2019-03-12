@@ -1,6 +1,5 @@
 package uk.ac.tees.t7014713.exnihilo_chatapplication.Adapter;
 
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -17,10 +16,8 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.List;
 
 import uk.ac.tees.t7014713.exnihilo_chatapplication.Model.Message;
-import uk.ac.tees.t7014713.exnihilo_chatapplication.PopupActivity;
+import uk.ac.tees.t7014713.exnihilo_chatapplication.Pop_up.PopupActivity;
 import uk.ac.tees.t7014713.exnihilo_chatapplication.R;
-
-import static android.content.Context.CLIPBOARD_SERVICE;
 
 /**
  * Created by Glenn on 09/03/2019.
