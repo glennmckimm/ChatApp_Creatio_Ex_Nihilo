@@ -82,8 +82,8 @@
                 android:text="Gifs"
                 android:id="@+id/btnGifs"
                 android:visibility="gone"
-                android:background="@color/colorWhite"
-                android:textColor="@color/colorPrimary"
+                android:background="@null"
+                android:textColor="@color/colorWhite"
                 android:layout_marginStart="20dp" />
 
             <Button
@@ -94,8 +94,8 @@
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:visibility="gone"
-                android:background="@color/colorWhite"
-                android:textColor="@color/colorPrimary"
+                android:background="@null"
+                android:textColor="@color/colorWhite"
                 android:layout_marginEnd="20dp" />
 
             <Button
@@ -106,8 +106,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="20dp"
                 android:visibility="gone"
-                android:background="@color/colorWhite"
-                android:textColor="@color/colorPrimary" />
+                android:background="@null"
+                android:textColor="@color/colorWhite" />
 
         </RelativeLayout>
 

@@ -127,7 +127,7 @@ public class ChatUsersFragment extends Fragment {
 
         Query query = FirebaseDatabase.getInstance()
                                       .getReference("user")
-                                      .orderByChild("username")
+                                      .orderByChild("search")
                                       .startAt(name)
                                       .endAt(name + "\uf8ff");
 

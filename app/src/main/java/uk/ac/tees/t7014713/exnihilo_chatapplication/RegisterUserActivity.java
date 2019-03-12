@@ -115,7 +115,7 @@ public class RegisterUserActivity extends AppCompatActivity {
 
             final FirebaseUser fa = FirebaseAuth.getInstance().getCurrentUser();
 
-            User user = new User(fa.getUid(), username.getText().toString());
+            User user = new User(fa.getUid(), username.getText().toString(), username.getText().toString().toLowerCase());
 
             databaseReference.child("user").child(fa.getUid()).setValue(user, new DatabaseReference.CompletionListener() {
                 @Override

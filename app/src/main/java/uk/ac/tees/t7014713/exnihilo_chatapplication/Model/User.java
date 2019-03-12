@@ -6,13 +6,16 @@ package uk.ac.tees.t7014713.exnihilo_chatapplication.Model;
 
 public class User {
 
-    private String userUID, username;
+    private String userUID;
+    private String username;
+    private String search;
 
     public User() { }
 
-    public User(String userUID, String username) {
+    public User(String userUID, String username, String search) {
         this.userUID = userUID;
         this.username = username;
+        this.search = search;
     }
 
     public void setUserUID(String userUID) {
@@ -29,5 +32,13 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    public String getSearch() {
+        return search;
     }
 }
