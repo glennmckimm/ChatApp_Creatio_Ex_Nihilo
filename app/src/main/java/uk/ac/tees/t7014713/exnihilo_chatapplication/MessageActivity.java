@@ -124,6 +124,13 @@ public class MessageActivity extends AppCompatActivity {
         btnGifs = findViewById(R.id.btnGifs);
 
         btnCamera = findViewById(R.id.btnCamera);
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), CameraActivity.class));
+            }
+        });
+
         btnGallery = findViewById(R.id.btnGallery);
         btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
