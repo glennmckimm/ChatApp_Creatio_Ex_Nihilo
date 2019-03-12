@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
@@ -30,9 +32,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     private Context mContext;
     private List<Message> mMessage;
-    private String imageUrl;
 
     FirebaseUser fUser;
+
+    private StorageReference storageReference;
 
     public MessageAdapter(Context mContext, List<Message> mMessage) {
         this.mMessage = mMessage;
@@ -49,6 +52,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             View view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_left, parent, false);
             return new MessageAdapter.ViewHolder(view);
         }
+
     }
 
     /**
@@ -58,13 +62,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
      * @param position
      */
     @Override
-    public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MessageAdapter.ViewHolder holder, int position) {
         final Message msg = mMessage.get(position);
         holder.showMessage.setText(msg.getMessage());
-        holder.showMessage.setOnClickListener(new View.OnClickListener() {
+        holder.showMessage.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
                 mContext.startActivity(new Intent(mContext, PopupActivity.class));
+                return false;
             }
         });
     }

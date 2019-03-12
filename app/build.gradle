@@ -35,6 +35,14 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
     implementation 'com.google.firebase:firebase-database:16.0.1'
     implementation 'com.google.firebase:firebase-storage:16.0.1'
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
+
+
+//////// Implement a later date ////////
+//https://github.com/koral--/android-gif-drawable - GIFs

@@ -51,6 +51,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 mContext.startActivity(intent);
             }
         });
+
+        //Replace with users set profile image
+        holder.profileImage.setImageResource(R.mipmap.ic_launcher_round);
     }
 
     @Override

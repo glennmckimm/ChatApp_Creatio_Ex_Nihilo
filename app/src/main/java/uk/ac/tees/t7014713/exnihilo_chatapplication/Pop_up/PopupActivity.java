@@ -7,9 +7,7 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-import uk.ac.tees.t7014713.exnihilo_chatapplication.Adapter.MessageAdapter;
 import uk.ac.tees.t7014713.exnihilo_chatapplication.R;
 
 /**
@@ -32,7 +30,7 @@ public class PopupActivity extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout(width, (int) (height*.2));
+        getWindow().setLayout(width, (int) (height*.25));
         getWindow().setGravity(Gravity.BOTTOM);
 
         reaction = findViewById(R.id.btnReaction);
@@ -42,7 +40,7 @@ public class PopupActivity extends Activity {
             @Override
             public void onClick(View view) {
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                //clipboard.setText(getText());
+                //clipboard.setText();
             }
         });
     }

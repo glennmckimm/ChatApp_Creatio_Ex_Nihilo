@@ -34,7 +34,7 @@ public class RegisterUserActivity extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
-    private final String clubID = UUID.randomUUID().toString();
+    private final String userID = UUID.randomUUID().toString();
     private Uri profileImage;
     private Button btnUploadProfileImage;
     private static final int GALLERY_INTENT = 2;
@@ -84,7 +84,7 @@ public class RegisterUserActivity extends AppCompatActivity {
 
             profileImage = data.getData();
 
-            StorageReference filePath = storageReference.child("profileImages").child(clubID);
+            StorageReference filePath = storageReference.child("profileImages").child(userID);
             filePath.putFile(profileImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -115,7 +115,7 @@ public class RegisterUserActivity extends AppCompatActivity {
 
             final FirebaseUser fa = FirebaseAuth.getInstance().getCurrentUser();
 
-            User user = new User(fa.getUid(), username.getText().toString(), username.getText().toString().toLowerCase());
+            User user = new User(fa.getUid(), username.getText().toString(), username.getText().toString().toLowerCase(), userID);
 
             databaseReference.child("user").child(fa.getUid()).setValue(user, new DatabaseReference.CompletionListener() {
                 @Override

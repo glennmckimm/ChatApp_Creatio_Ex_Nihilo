@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import uk.ac.tees.t7014713.exnihilo_chatapplication.Adapter.SectionsPagerAdapter;
 import uk.ac.tees.t7014713.exnihilo_chatapplication.Model.User;
@@ -36,9 +38,10 @@ public class UserActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
     private TextView profileUsername;
+    private ImageView profileImage;
 
-    FirebaseUser fuser;
-    DatabaseReference databaseReference;
+    private FirebaseUser fuser;
+    private DatabaseReference databaseReference;
 
     /**
      * Displays the necessary information in the UserActivity
@@ -62,6 +65,9 @@ public class UserActivity extends AppCompatActivity {
 
         profileUsername = findViewById(R.id.profileUsername);
         setProfileUsername();
+
+        profileImage = findViewById(R.id.profileImage);
+        profileImage.setImageResource(R.mipmap.ic_launcher);
     }
 
     /**

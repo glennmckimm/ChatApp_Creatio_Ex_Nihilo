@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ import uk.ac.tees.t7014713.exnihilo_chatapplication.Pop_up.PopupOptionsActivity;
 public class MessageActivity extends AppCompatActivity {
 
     private TextView username;
+    private ImageView profileImage;
     private ImageButton btnSend;
     private EditText txtSend;
     private ImageButton btnChoice;
@@ -78,6 +80,11 @@ public class MessageActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         username = findViewById(R.id.username);
+
+        profileImage = findViewById(R.id.profileImage);
+        //Replace with users set image
+        profileImage.setImageResource(R.mipmap.ic_launcher_round);
+
         txtSend = findViewById(R.id.txtSend);
 
         Intent intent = getIntent();
@@ -92,7 +99,7 @@ public class MessageActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
 
-                readMessage(fUser.getUid(), userID);
+                readMessage(fUser.getUid(), userID, user.getImageURL());
             }
 
             @Override
@@ -178,7 +185,7 @@ public class MessageActivity extends AppCompatActivity {
      * @param senderID
      * @param receiverID
      */
-    private void readMessage(final String senderID, final String receiverID) {
+    private void readMessage(final String senderID, final String receiverID, final String imageUrl) {
         mMessage = new ArrayList<>();
 
         databaseReference = FirebaseDatabase.getInstance().getReference("chats");

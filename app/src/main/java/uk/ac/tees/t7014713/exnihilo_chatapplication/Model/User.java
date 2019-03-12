@@ -9,15 +9,16 @@ public class User {
     private String userUID;
     private String username;
     private String search;
+    private String imageURL;
 
     public User() { }
 
-    public User(String userUID, String username, String search) {
+    public User(String userUID, String username, String search, String imageURL) {
         this.userUID = userUID;
         this.username = username;
         this.search = search;
+        this.imageURL = imageURL;
     }
-
     public void setUserUID(String userUID) {
        this.userUID = userUID;
     }
@@ -40,5 +41,13 @@ public class User {
 
     public String getSearch() {
         return search;
+    }
+
+    public void setImageURL(String search) {
+        this.imageURL = imageURL;
+    }
+
+    public String getImageURL() {
+        return imageURL;
     }
 }
