@@ -23,5 +23,5 @@
         android:textColor="@color/colorWhite"
         android:padding="8dp"
         android:background="@drawable/chat_item_left" />
-    
+
 </RelativeLayout>
